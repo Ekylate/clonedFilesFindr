@@ -15,4 +15,17 @@
       </plugin>
     </plugins>
   </build>
+  <dependencies>
+  	<!-- https://mvnrepository.com/artifact/nio/nio -->
+	<dependency>
+		<groupId>nio</groupId>
+		<artifactId>nio</artifactId>
+		<version>1.0.4</version>
+	</dependency>
+  	<dependency>
+    	<groupId>org.apache.commons</groupId>
+    	<artifactId>lang3</artifactId>
+    	<version>3.1.0</version>
+  	</dependency>
+  </dependencies>
 </project>

@@ -1,5 +1,6 @@
 package services;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -12,7 +13,6 @@ import java.nio.file.Path;
  */
 public class FileService {
 	//TODO : Faire une condition
-	//TODO : Choisir librairie pour manipulation fichiers
 	public boolean isParamAFile(String pathParam) {
 		boolean result = false;
 		Path parsedPath = Path.of(pathParam, null);
@@ -20,9 +20,21 @@ public class FileService {
 		return result;
 	}
 	
-	//TODO: Créer méthode pour vérifier si répertoire ou non
+	public boolean isParamADirectory(String pathParam) {
+		boolean result = false;
+		Path parsedPath = Path.of(pathParam, null);
+		result = Files.isDirectory(parsedPath, LinkOption.NOFOLLOW_LINKS);
+		return result;
+	}
 	
-	//TODO: Créer méthode pour pouvoir récupérer taille
+	public long getSizeOfParam(String pathParam) throws IOException {
+		long result = 0L;
+		Path parsedPath = Path.of(pathParam, null);
+		if(isParamADirectory(pathParam) || isParamAFile(pathParam)) {
+			result = Files.size(parsedPath);
+		}
+		return result;
+	}
 	
 	//TODO: Créer méthode pour pouvoir récupérer nom
 

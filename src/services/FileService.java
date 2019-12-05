@@ -1,9 +1,12 @@
 package services;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
+
+import com.sun.tools.javac.util.StringUtils;
 
 /**
  * Class used to manipulates files
@@ -37,5 +40,15 @@ public class FileService {
 	}
 	
 	//TODO: Créer méthode pour pouvoir récupérer nom
+	
+	public File getFile(String pathParam) {
+		File file = null;
+		if(!StringUtils.isBlank(pathParam)) {
+			Path parsedPath = Path.of(pathParam, null);
+//			Files.g
+		}
+		return file;
+		
+	}
 
 }

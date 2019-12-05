@@ -26,6 +26,7 @@ public class IOConsoleService {
 	public static String fetchDataFromConsole() {
 		Scanner scanner = new Scanner(System.in);
 		String incomingValue = scanner.next();
+		return incomingValue;
 	}
 
 }

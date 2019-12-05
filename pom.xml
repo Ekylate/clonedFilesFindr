@@ -22,10 +22,17 @@
 		<artifactId>nio</artifactId>
 		<version>1.0.4</version>
 	</dependency>
-  	<dependency>
-    	<groupId>org.apache.commons</groupId>
-    	<artifactId>lang3</artifactId>
-    	<version>3.1.0</version>
-  	</dependency>
+<!--   	<dependency> -->
+<!--     	<groupId>org.apache.commons</groupId> -->
+<!--     	<artifactId>lang3</artifactId> -->
+<!--     	<version>3.1.0</version> -->
+<!--   	</dependency> -->
+  	<!-- https://mvnrepository.com/artifact/org.mx/mx-utils -->
+	<dependency>
+	    <groupId>org.mx</groupId>
+	    <artifactId>mx-utils</artifactId>
+	    <version>3.0.3</version>
+	</dependency>
+  	
   </dependencies>
 </project>

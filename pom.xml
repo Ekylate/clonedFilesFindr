@@ -8,31 +8,26 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
-        <configuration>
-          <release>12</release>
-        </configuration>
+        <version>3.8.1</version>
+<!--         <configuration> -->
+<!--           <release>12</release> -->
+<!--         </configuration> -->
       </plugin>
     </plugins>
   </build>
   <dependencies>
-  	<!-- https://mvnrepository.com/artifact/nio/nio -->
-	<dependency>
-		<groupId>nio</groupId>
-		<artifactId>nio</artifactId>
-		<version>1.0.4</version>
-	</dependency>
-<!--   	<dependency> -->
-<!--     	<groupId>org.apache.commons</groupId> -->
-<!--     	<artifactId>lang3</artifactId> -->
-<!--     	<version>3.1.0</version> -->
-<!--   	</dependency> -->
-  	<!-- https://mvnrepository.com/artifact/org.mx/mx-utils -->
-	<dependency>
-	    <groupId>org.mx</groupId>
-	    <artifactId>mx-utils</artifactId>
-	    <version>3.0.3</version>
-	</dependency>
-  	
+<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore-nio -->
+<dependency>
+    <groupId>org.apache.httpcomponents</groupId>
+    <artifactId>httpcore-nio</artifactId>
+    <version>4.4.12</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.9</version>
+</dependency>
+
   </dependencies>
 </project>

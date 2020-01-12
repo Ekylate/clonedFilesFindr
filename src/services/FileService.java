@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import com.sun.tools.javac.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Class used to manipulates files
@@ -18,21 +19,21 @@ public class FileService {
 	//TODO : Faire une condition
 	public boolean isParamAFile(String pathParam) {
 		boolean result = false;
-		Path parsedPath = Path.of(pathParam, null);
+		Path parsedPath = Paths.get(pathParam, null);
 		result = Files.isRegularFile(parsedPath, LinkOption.NOFOLLOW_LINKS);
 		return result;
 	}
 	
 	public boolean isParamADirectory(String pathParam) {
 		boolean result = false;
-		Path parsedPath = Path.of(pathParam, null);
+		Path parsedPath = Paths.get(pathParam, null);
 		result = Files.isDirectory(parsedPath, LinkOption.NOFOLLOW_LINKS);
 		return result;
 	}
 	
 	public long getSizeOfParam(String pathParam) throws IOException {
 		long result = 0L;
-		Path parsedPath = Path.of(pathParam, null);
+		Path parsedPath = Paths.get(pathParam, null);
 		if(isParamADirectory(pathParam) || isParamAFile(pathParam)) {
 			result = Files.size(parsedPath);
 		}
@@ -44,8 +45,7 @@ public class FileService {
 	public File getFile(String pathParam) {
 		File file = null;
 		if(!StringUtils.isBlank(pathParam)) {
-			Path parsedPath = Path.of(pathParam, null);
-//			Files.g
+			Path parsedPath = Paths.get(pathParam, null);
 		}
 		return file;
 		

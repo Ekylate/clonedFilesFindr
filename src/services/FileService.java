@@ -16,24 +16,26 @@ import org.apache.commons.lang3.StringUtils;
  *
  */
 public class FileService {
+	private String[] emptyStringArray = new String[0];
+	
 	//TODO : Faire une condition
 	public boolean isParamAFile(String pathParam) {
 		boolean result = false;
-		Path parsedPath = Paths.get(pathParam, null);
+		Path parsedPath = Paths.get(pathParam, emptyStringArray);
 		result = Files.isRegularFile(parsedPath, LinkOption.NOFOLLOW_LINKS);
 		return result;
 	}
 	
 	public boolean isParamADirectory(String pathParam) {
 		boolean result = false;
-		Path parsedPath = Paths.get(pathParam, null);
+		Path parsedPath = Paths.get(pathParam, emptyStringArray);
 		result = Files.isDirectory(parsedPath, LinkOption.NOFOLLOW_LINKS);
 		return result;
 	}
 	
 	public long getSizeOfParam(String pathParam) throws IOException {
 		long result = 0L;
-		Path parsedPath = Paths.get(pathParam, null);
+		Path parsedPath = Paths.get(pathParam, emptyStringArray);
 		if(isParamADirectory(pathParam) || isParamAFile(pathParam)) {
 			result = Files.size(parsedPath);
 		}
@@ -45,7 +47,7 @@ public class FileService {
 	public File getFile(String pathParam) {
 		File file = null;
 		if(!StringUtils.isBlank(pathParam)) {
-			Path parsedPath = Paths.get(pathParam, null);
+			Path parsedPath = Paths.get(pathParam, emptyStringArray);
 		}
 		return file;
 		

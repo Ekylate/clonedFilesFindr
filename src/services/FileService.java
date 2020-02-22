@@ -42,15 +42,29 @@ public class FileService {
 		return result;
 	}
 	
-	//TODO: Créer méthode pour pouvoir récupérer nom
+	public String getFilename(String pathParam) {
+		String result = StringUtils.EMPTY;
+		if(StringUtils.isNotEmpty(pathParam)) {
+			Path parsedPath = Paths.get(pathParam, emptyStringArray);
+			result = parsedPath.getFileName().toString();
+		}
+		return result;
+		
+	}
 	
 	public File getFile(String pathParam) {
 		File file = null;
 		if(!StringUtils.isBlank(pathParam)) {
 			Path parsedPath = Paths.get(pathParam, emptyStringArray);
+			file = parsedPath.toFile();
 		}
 		return file;
 		
+	}
+	
+	//TODO : change return type to contain all results
+	public void listFilesInDirectory(String pathParam) throws IOException {
+		Files.list(new File(pathParam).toPath()).forEach(path -> System.out.println(path));
 	}
 
 }

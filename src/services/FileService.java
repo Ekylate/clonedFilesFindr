@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -17,54 +18,70 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class FileService {
 	private String[] emptyStringArray = new String[0];
-	
-	//TODO : Faire une condition
+
+	// TODO : Faire une condition
 	public boolean isParamAFile(String pathParam) {
 		boolean result = false;
 		Path parsedPath = Paths.get(pathParam, emptyStringArray);
 		result = Files.isRegularFile(parsedPath, LinkOption.NOFOLLOW_LINKS);
 		return result;
 	}
-	
+
 	public boolean isParamADirectory(String pathParam) {
 		boolean result = false;
 		Path parsedPath = Paths.get(pathParam, emptyStringArray);
 		result = Files.isDirectory(parsedPath, LinkOption.NOFOLLOW_LINKS);
 		return result;
 	}
-	
+
 	public long getSizeOfParam(String pathParam) throws IOException {
 		long result = 0L;
 		Path parsedPath = Paths.get(pathParam, emptyStringArray);
-		if(isParamADirectory(pathParam) || isParamAFile(pathParam)) {
+		if (isParamADirectory(pathParam) || isParamAFile(pathParam)) {
 			result = Files.size(parsedPath);
 		}
 		return result;
 	}
-	
+
 	public String getFilename(String pathParam) {
 		String result = StringUtils.EMPTY;
-		if(StringUtils.isNotEmpty(pathParam)) {
+		if (StringUtils.isNotEmpty(pathParam)) {
 			Path parsedPath = Paths.get(pathParam, emptyStringArray);
 			result = parsedPath.getFileName().toString();
 		}
 		return result;
-		
+
 	}
-	
+
 	public File getFile(String pathParam) {
 		File file = null;
-		if(!StringUtils.isBlank(pathParam)) {
+		if (!StringUtils.isBlank(pathParam)) {
 			Path parsedPath = Paths.get(pathParam, emptyStringArray);
 			file = parsedPath.toFile();
 		}
 		return file;
-		
 	}
-	
-	//TODO : change return type to contain all results
-	public void listFilesInDirectory(String pathParam) throws IOException {
-		Files.list(new File(pathParam).toPath()).forEach(path -> System.out.println(path));
+
+	public String listFilesInDirectory(String pathParam) {
+		StringBuilder result = new StringBuilder();
+		Stream<Path> tmp = null;
+		try {
+			tmp = Files.list(new File(pathParam).toPath());
+			// TODO : use logger here
+			tmp.forEach(path -> {
+				System.out.println(path);
+				result.append(pathParam).append(System.lineSeparator());
+			});
+		} catch (IOException ioe) {
+			// TODO : use logger here
+			System.out.println("Problème avec le parcours du dossier : " + pathParam);
+			System.out.println("An IOException occured and here is why : " + ioe.getCause().getMessage());
+		} finally {
+			if (tmp != null) {
+				tmp.close();
+			}
+		}
+		return result.toString();
 	}
 
 }

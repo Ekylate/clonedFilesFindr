@@ -8,7 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-import org.apache.commons.lang3.StringUtils;
+import maestro.utils.StringUtils;
+import maestro.utils.constants.PunctuationStringConstants;
 
 /**
  * Class used to manipulates files
@@ -17,24 +18,24 @@ import org.apache.commons.lang3.StringUtils;
  *
  */
 public class FileService {
-	private String[] emptyStringArray = new String[0];
-
+	private static final String[] emptyStringArray = new String[0];
+	
 	// TODO : Faire une condition
-	public boolean isParamAFile(String pathParam) {
+	public static boolean isParamAFile(String pathParam) {
 		boolean result = false;
 		Path parsedPath = Paths.get(pathParam, emptyStringArray);
 		result = Files.isRegularFile(parsedPath, LinkOption.NOFOLLOW_LINKS);
 		return result;
 	}
 
-	public boolean isParamADirectory(String pathParam) {
+	public static boolean isParamADirectory(String pathParam) {
 		boolean result = false;
 		Path parsedPath = Paths.get(pathParam, emptyStringArray);
 		result = Files.isDirectory(parsedPath, LinkOption.NOFOLLOW_LINKS);
 		return result;
 	}
 
-	public long getSizeOfParam(String pathParam) throws IOException {
+	public static long getSizeOfParam(String pathParam) throws IOException {
 		long result = 0L;
 		Path parsedPath = Paths.get(pathParam, emptyStringArray);
 		if (isParamADirectory(pathParam) || isParamAFile(pathParam)) {
@@ -43,7 +44,7 @@ public class FileService {
 		return result;
 	}
 
-	public String getFilename(String pathParam) {
+	public static String getFilename(String pathParam) {
 		String result = StringUtils.EMPTY;
 		if (StringUtils.isNotEmpty(pathParam)) {
 			Path parsedPath = Paths.get(pathParam, emptyStringArray);
@@ -53,7 +54,7 @@ public class FileService {
 
 	}
 
-	public File getFile(String pathParam) {
+	public static File getFile(String pathParam) {
 		File file = null;
 		if (!StringUtils.isBlank(pathParam)) {
 			Path parsedPath = Paths.get(pathParam, emptyStringArray);
@@ -62,14 +63,14 @@ public class FileService {
 		return file;
 	}
 
-	public String listFilesInDirectory(String pathParam) {
+	public static String listFilesInDirectory(String pathParam, String prefix) {
 		StringBuilder result = new StringBuilder();
 		Stream<Path> tmp = null;
 		try {
 			tmp = Files.list(new File(pathParam).toPath());
 			// TODO : use logger here
 			tmp.forEach(path -> {
-				System.out.println(path);
+//				System.out.println(path);
 				result.append(pathParam).append(System.lineSeparator());
 			});
 		} catch (IOException ioe) {

@@ -1,6 +1,8 @@
 package maestro;
 
+import maestro.utils.StringUtils;
 import modules.SearchModule;
+import services.FileService;
 import services.IOConsoleService;
 import services.MessagesService;
 
@@ -33,26 +35,23 @@ public class Ordonnanceur {
 
 	private static void analyserChemin() {
 		// TODO Launch analysis of the targeted folder
-		
+		System.out.println(FileService.listFilesInDirectoryRecursively(spider.getTargetNode(), StringUtils.EMPTY));
 	}
 
 	private static void demanderOptionsAnalyse() {
 		//TODO : Look for other ways to fetch messages
-		String msgParam = MessagesService.getString("Ordonnanceur.mainmenu.0"); //$NON-NLS-1$
-		IOConsoleService.displayMessageInConsole(msgParam);
+		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.0"));
 	}
 
 	private static void demanderCheminAAnalyser() {
 		//TODO : Look for other ways to fetch messages
-		String msgParam = MessagesService.getString("Ordonnanceur.mainmenu.1"); //$NON-NLS-1$
-		IOConsoleService.displayMessageInConsole(msgParam);
+		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.1"));
 		spider.setTargetNode(IOConsoleService.fetchDataFromConsole());
 	}
 
 	private static void saluer() {
 		//TODO : Look for other ways to fetch messages
-		String greetings = MessagesService.getString("Ordonnanceur.mainmenu.2"); //$NON-NLS-1$
-		IOConsoleService.displayMessageInConsole(greetings);
+		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.2"));
 	}
 
 }

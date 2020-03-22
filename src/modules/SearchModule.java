@@ -3,9 +3,8 @@ package modules;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import BusinessObjects.SeachResultBO;
+import maestro.utils.StringUtils;
 import services.FileService;
 
 /**
@@ -16,7 +15,6 @@ import services.FileService;
 public class SearchModule {
 	private String rootNode = StringUtils.EMPTY;
 	private SeachResultBO resultBo = new SeachResultBO();
-	private FileService fileService = new FileService();
 	private List<String> notParsedYet = new ArrayList<String>();
 	
 	//TODO : remanier méthode pour que récursivité ou boucle
@@ -24,9 +22,9 @@ public class SearchModule {
 		String targetNode = StringUtils.EMPTY;
 		
 		if(StringUtils.isNotBlank(rootNode)) {
-			if(fileService.isParamADirectory(rootNode)) {
+			if(FileService.isParamADirectory(rootNode)) {
 				// TODO : ajouter une récursivité
-				notParsedYet.add(fileService.listFilesInDirectory(rootNode));
+//				notParsedYet.add(FileService.listFilesInDirectory(rootNode));
 			}
 			//TODO : use LOGGER here in case targetNode is not a directory
 		} 

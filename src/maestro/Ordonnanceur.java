@@ -1,8 +1,9 @@
 package maestro;
 
-import maestro.utils.StringUtils;
+import java.util.List;
+import java.util.Map;
+
 import modules.SearchModule;
-import services.FileService;
 import services.IOConsoleService;
 import services.MessagesService;
 
@@ -34,8 +35,9 @@ public class Ordonnanceur {
 	}
 
 	private static void analyserChemin() {
-		// TODO Launch analysis of the targeted folder
-		System.out.println(FileService.listFilesInDirectoryRecursively(spider.getTargetNode(), StringUtils.EMPTY));
+		spider.explore();
+		Map<String, List<String>> searchForMatchesInFetchedData = spider.searchForMatchesInFetchedData();
+		System.out.println(spider.getResult(searchForMatchesInFetchedData));
 	}
 
 	private static void demanderOptionsAnalyse() {

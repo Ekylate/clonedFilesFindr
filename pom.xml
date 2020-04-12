@@ -5,6 +5,9 @@
 	<groupId>kazanmw.projects.perso</groupId>
 	<artifactId>cloneFinder</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<encoding>UTF-8</encoding>
+	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -17,7 +20,49 @@
 				<!-- <release>12</release> -->
 				</configuration>
 			</plugin>
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-dependency-plugin</artifactId>
+			    <executions>
+			        <execution>
+			            <id>copy-dependencies</id>
+			            <phase>package</phase>
+			            <goals>
+			                <goal>copy-dependencies</goal>
+			            </goals>
+			            <configuration>
+			                <outputDirectory>${project.build.directory}/lib</outputDirectory>
+			                <overWriteReleases>false</overWriteReleases>
+			                <overWriteSnapshots>false</overWriteSnapshots>
+			                <overWriteIfNewer>true</overWriteIfNewer>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-jar-plugin</artifactId>
+			    <version>3.1.2</version>
+			    <configuration>
+			        <archive>
+			            <manifest>
+			            	<addClasspath>true</addClasspath>
+			            	<classpathPrefix>lib/</classpathPrefix>
+			                <mainClass>maestro.Ordonnanceur</mainClass>
+			                <packageName>${project.groupId}</packageName>
+			            </manifest>
+			            <manifestEntries>
+			                <Created-By>Unknown-guy</Created-By>
+			            </manifestEntries>
+			        </archive>
+			    </configuration>
+			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>${project.build.sourceDirectory}\..\resources</directory>
+			</resource>
+		</resources>
 	</build>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore-nio -->

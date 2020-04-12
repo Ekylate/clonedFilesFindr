@@ -1,5 +1,8 @@
 package maestro;
 
+import java.util.List;
+import java.util.Map;
+
 import modules.SearchModule;
 import services.IOConsoleService;
 import services.MessagesService;
@@ -32,27 +35,25 @@ public class Ordonnanceur {
 	}
 
 	private static void analyserChemin() {
-		// TODO Launch analysis of the targeted folder
-		
+		spider.explore();
+		Map<String, List<String>> searchForMatchesInFetchedData = spider.searchForMatchesInFetchedData();
+		System.out.println(spider.getResult(searchForMatchesInFetchedData));
 	}
 
 	private static void demanderOptionsAnalyse() {
 		//TODO : Look for other ways to fetch messages
-		String msgParam = MessagesService.getString("Ordonnanceur.mainmenu.0"); //$NON-NLS-1$
-		IOConsoleService.displayMessageInConsole(msgParam);
+		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.0"));
 	}
 
 	private static void demanderCheminAAnalyser() {
 		//TODO : Look for other ways to fetch messages
-		String msgParam = MessagesService.getString("Ordonnanceur.mainmenu.1"); //$NON-NLS-1$
-		IOConsoleService.displayMessageInConsole(msgParam);
+		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.1"));
 		spider.setTargetNode(IOConsoleService.fetchDataFromConsole());
 	}
 
 	private static void saluer() {
 		//TODO : Look for other ways to fetch messages
-		String greetings = MessagesService.getString("Ordonnanceur.mainmenu.2"); //$NON-NLS-1$
-		IOConsoleService.displayMessageInConsole(greetings);
+		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.2"));
 	}
 
 }

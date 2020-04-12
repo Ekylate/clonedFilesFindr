@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class used to manipulates files
@@ -17,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  */
 public class FileService {
+	private Logger LOGGER = LoggerFactory.getLogger(FileService.class);
 	private String[] emptyStringArray = new String[0];
 
 	// TODO : Faire une condition
@@ -83,5 +86,4 @@ public class FileService {
 		}
 		return result.toString();
 	}
-
 }

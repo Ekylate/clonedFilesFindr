@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import BusinessObjects.SeachResultBO;
-import maestro.utils.StringUtils;
 import maestro.utils.constants.PunctuationStringConstants;
 import services.FileService;
 
@@ -33,8 +32,6 @@ public class SearchModule {
 			if(FileService.isParamADirectory(rootNode)) {
 //				notParsedYet.add(FileService.listFilesInDirectory(rootNode));
 				notParsedYet.addAll(FileService.listFilesInDirectoryRecursively(rootNode));
-			} else {
-				//TODO : use LOGGER here in case targetNode is not a directory
 			} else {
 				LOGGER.debug("Element rencontré non répertoire : {}", rootNode);
 			}
@@ -64,7 +61,7 @@ public class SearchModule {
 			paramMap.entrySet().stream()
 					.forEach(entry -> result.append(entry.getKey()).append(System.lineSeparator())
 							.append(PunctuationStringConstants.BLANKSPACE)
-							.append(StringUtils.concatenateStringListToSingleMultilinedString(entry.getValue(),
+							.append(maestro.utils.StringUtils.concatenateStringListToSingleMultilinedString(entry.getValue(),
 									PunctuationStringConstants.FIVE_WHITESPACES)));
 		}
 		return result.toString();

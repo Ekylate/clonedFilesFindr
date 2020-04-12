@@ -21,7 +21,7 @@ public class StringUtils {
 	}
 	
 	public static boolean isBlank(String paramToCheck) {
-		return (paramToCheck == null || isEmpty(paramToCheck) || paramToCheck.isBlank());
+		return (paramToCheck == null || isEmpty(paramToCheck) || StringUtils.isBlank(paramToCheck));
 	}
 
 	public static boolean isNotBlank(String paramToCheck) {

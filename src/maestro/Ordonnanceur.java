@@ -3,6 +3,8 @@ package maestro;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import modules.SearchModule;
 import services.IOConsoleService;
 import services.MessagesService;
@@ -16,6 +18,7 @@ import services.MessagesService;
 public class Ordonnanceur {
 	
 	private static final SearchModule spider = new SearchModule();
+	private static String resultMatches = StringUtils.EMPTY;
 
 	/**
 	 * Main method of that program
@@ -30,30 +33,32 @@ public class Ordonnanceur {
 	}
 
 	private static void restituerAnalyse() {
-		// TODO Get results and format them for rendering
+		// TODO create result file
+		System.out.println(resultMatches);
+		System.out.println();
 		
 	}
 
 	private static void analyserChemin() {
 		spider.explore();
 		Map<String, List<String>> searchForMatchesInFetchedData = spider.searchForMatchesInFetchedData();
-		System.out.println(spider.getResult(searchForMatchesInFetchedData));
+		resultMatches = spider.getResult(searchForMatchesInFetchedData);
 	}
 
 	private static void demanderOptionsAnalyse() {
-		//TODO : Look for other ways to fetch messages
-		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.0"));
+		// TODO: process fetched options 
+		String msgParam = MessagesService.getString("Ordonnanceur.mainmenu.2"); //$NON-NLS-1$
+		IOConsoleService.displayMessageInConsole(msgParam);
+		String trc = IOConsoleService.fetchDataFromConsole();
 	}
 
 	private static void demanderCheminAAnalyser() {
-		//TODO : Look for other ways to fetch messages
 		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.1"));
 		spider.setTargetNode(IOConsoleService.fetchDataFromConsole());
 	}
 
 	private static void saluer() {
-		//TODO : Look for other ways to fetch messages
-		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.2"));
+		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.0"));
 	}
 
 }

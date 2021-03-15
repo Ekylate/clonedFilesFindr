@@ -70,6 +70,9 @@ public class FileService {
 		}
 		return file;
 	}
+	
+	public static void writeFile(String pathToWriteFileTo, String fileContent) {
+	}
 
 	public static Set<String> listFilesInDirectory(String pathParam) {
 		Set<String> result = new HashSet<>();

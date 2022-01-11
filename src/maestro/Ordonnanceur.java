@@ -27,7 +27,7 @@ public class Ordonnanceur {
 	public static void main(String[] args) {
 		saluer();
 		demanderCheminAAnalyser();
-		demanderOptionsAnalyse();
+//		demanderOptionsAnalyse();
 		analyserChemin();
 		restituerAnalyse();
 	}

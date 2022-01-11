@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import BusinessObjects.SeachResultBO;
+import BusinessObjects.SearchResultBO;
 import maestro.utils.constants.PunctuationStringConstants;
 import services.FileService;
 
@@ -22,7 +22,7 @@ import services.FileService;
 public class SearchModule {
 	private static final int FLOOR_VALUE_TO_NOTICE_DOUBLONS = 1;
 	private String rootNode = StringUtils.EMPTY;
-	private SeachResultBO resultBo = new SeachResultBO();
+	private SearchResultBO resultBo = new SearchResultBO();
 	private final List<Path> notParsedYet = new ArrayList<>();
 	private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	
@@ -84,14 +84,14 @@ public class SearchModule {
 	/**
 	 * @return the resultBo
 	 */
-	public SeachResultBO getResultBo() {
+	public SearchResultBO getResultBo() {
 		return resultBo;
 	}
 
 	/**
 	 * @param resultBo the resultBo to set
 	 */
-	public void setResultBo(SeachResultBO resultBo) {
+	public void setResultBo(SearchResultBO resultBo) {
 		this.resultBo = resultBo;
 	}
 	

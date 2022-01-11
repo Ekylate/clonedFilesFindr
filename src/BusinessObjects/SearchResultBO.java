@@ -8,7 +8,7 @@ import java.util.Map;
  * @author jtantoine
  *
  */
-public class SeachResultBO {
+public class SearchResultBO {
 	private Map<String, List<String>> resultsByName;
 	private Map<String, List<String>> resultsBySize;
 

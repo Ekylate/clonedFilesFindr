@@ -21,7 +21,7 @@ public class StringUtils {
 	}
 	
 	public static boolean isBlank(String paramToCheck) {
-		return (paramToCheck == null || isEmpty(paramToCheck) || StringUtils.isBlank(paramToCheck));
+		return (paramToCheck == null || isEmpty(paramToCheck) || org.apache.commons.lang3.StringUtils.isBlank(paramToCheck));
 	}
 
 	public static boolean isNotBlank(String paramToCheck) {
@@ -43,7 +43,7 @@ public class StringUtils {
 			for (String elmt : listParam) {
 				strBuildr.append(offset).append(elmt).append(System.lineSeparator());
 			}
-			result.concat(strBuildr.toString());
+			result = strBuildr.toString();
 		}
 		return result;
 	}

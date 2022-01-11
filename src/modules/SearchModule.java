@@ -61,7 +61,7 @@ public class SearchModule {
 		if (!paramMap.isEmpty()) {
 			paramMap.entrySet().stream()
 					.forEach(entry -> result.append(entry.getKey()).append(System.lineSeparator())
-							.append(PunctuationStringConstants.BLANKSPACE)
+							.append(PunctuationStringConstants.WHITESPACE)
 							.append(maestro.utils.StringUtils.concatenateStringListToSingleMultilinedString(entry.getValue(),
 									PunctuationStringConstants.FIVE_WHITESPACES)));
 		}

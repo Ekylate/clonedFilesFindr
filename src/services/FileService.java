@@ -151,7 +151,7 @@ public class FileService {
 						alreadyPrintedElements.add(path.toString());
 					}
 					if(isParamADirectory(path.toString())) {
-						result.append(listFilesInDirectoryRecursivelyWithRendering(path.toString(), PunctuationStringConstants.BLANKSPACE+prefix));
+						result.append(listFilesInDirectoryRecursivelyWithRendering(path.toString(), PunctuationStringConstants.WHITESPACE+prefix));
 					}
 				});
 			} else {

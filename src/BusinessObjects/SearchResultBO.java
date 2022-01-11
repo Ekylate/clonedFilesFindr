@@ -1,5 +1,6 @@
 package BusinessObjects;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,9 @@ public class SearchResultBO {
 	 * @return the resultsByName
 	 */
 	public Map<String, List<String>> getResultsByName() {
+		if(resultsByName == null) {
+			resultsByName = new HashMap<>();
+		}
 		return resultsByName;
 	}
 	/**

@@ -17,27 +17,27 @@ public class SearchResultBO {
 	 * @return the resultsByName
 	 */
 	public Map<String, List<String>> getResultsByName() {
-		if(resultsByName == null) {
-			resultsByName = new HashMap<>();
+		if(this.resultsByName == null) {
+			this.resultsByName = new HashMap<>();
 		}
-		return resultsByName;
+		return this.resultsByName;
 	}
 	/**
 	 * @param resultsByName the resultsByName to set
 	 */
-	public void setResultsByName(Map<String, List<String>> resultsByName) {
+	public void setResultsByName(final Map<String, List<String>> resultsByName) {
 		this.resultsByName = resultsByName;
 	}
 	/**
 	 * @return the resultsBySize
 	 */
 	public Map<String, List<String>> getResultsBySize() {
-		return resultsBySize;
+		return this.resultsBySize;
 	}
 	/**
 	 * @param resultsBySize the resultsBySize to set
 	 */
-	public void setResultsBySize(Map<String, List<String>> resultsBySize) {
+	public void setResultsBySize(final Map<String, List<String>> resultsBySize) {
 		this.resultsBySize = resultsBySize;
 	}
 

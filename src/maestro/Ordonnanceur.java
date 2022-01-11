@@ -11,12 +11,12 @@ import services.MessagesService;
 
 /**
  * Class used to launch processes
- * 
+ *
  * @author jtantoine
  *
  */
 public class Ordonnanceur {
-	
+
 	private static final SearchModule spider = new SearchModule();
 	private static String resultMatches = StringUtils.EMPTY;
 
@@ -24,7 +24,7 @@ public class Ordonnanceur {
 	 * Main method of that program
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		saluer();
 		demanderCheminAAnalyser();
 //		demanderOptionsAnalyse();
@@ -36,20 +36,20 @@ public class Ordonnanceur {
 		// TODO create result file
 		System.out.println(resultMatches);
 		System.out.println();
-		
+
 	}
 
 	private static void analyserChemin() {
 		spider.explore();
-		Map<String, List<String>> searchForMatchesInFetchedData = spider.searchForMatchesInFetchedData();
+		final Map<String, List<String>> searchForMatchesInFetchedData = spider.searchForMatchesInFetchedData();
 		resultMatches = spider.getResult(searchForMatchesInFetchedData);
 	}
 
 	private static void demanderOptionsAnalyse() {
-		// TODO: process fetched options 
-		String msgParam = MessagesService.getString("Ordonnanceur.mainmenu.2"); //$NON-NLS-1$
+		// TODO: process fetched options
+		final String msgParam = MessagesService.getString("Ordonnanceur.mainmenu.2"); //$NON-NLS-1$
 		IOConsoleService.displayMessageInConsole(msgParam);
-		String trc = IOConsoleService.fetchDataFromConsole();
+		final String trc = IOConsoleService.fetchDataFromConsole();
 	}
 
 	private static void demanderCheminAAnalyser() {

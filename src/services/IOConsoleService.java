@@ -11,27 +11,27 @@ import maestro.utils.StringUtils;
  *
  */
 public class IOConsoleService {
-	
+
 	/**
 	 * Méthode permettant d'afficher du texte en console
-	 * 
+	 *
 	 * @param msgParam
 	 */
 	// TODO : Use a logger just in case there is a problem with the content
-	public static void displayMessageInConsole(String msgParam) {
+	public static void displayMessageInConsole(final String msgParam) {
 		if (StringUtils.isNotBlank(msgParam)) {
 			System.out.println(msgParam);
 		}
 	}
-	
+
 	/**
 	 * Méthode permettant de récupérer les entrants en provenance de la console
 	 * @return ce que l'utilisateur a récupéré
 	 */
-	//TODO : create utils method 
+	//TODO : create utils method
 	public static String fetchDataFromConsole() {
-		Scanner scanner = new Scanner(System.in);
-		String incomingValue = scanner.next();
+		final Scanner scanner = new Scanner(System.in);
+		final String incomingValue = scanner.next();
 		scanner.close();
 		return incomingValue;
 	}

@@ -11,10 +11,10 @@ public class MessagesService {
 	private MessagesService() {
 	}
 
-	public static String getString(String key) {
+	public static String getString(final String key) {
 		try {
 			return RESOURCE_BUNDLE.getString(key);
-		} catch (MissingResourceException e) {
+		} catch (final MissingResourceException e) {
 			return "//!\\ Missing key in resources file : " + key;
 		}
 	}

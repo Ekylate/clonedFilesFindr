@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.io.FileUtils;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,37 +27,38 @@ public class SearchModule {
 	private String rootNode = StringUtils.EMPTY;
 	private SearchResultBO resultBo = new SearchResultBO();
 	private final List<Path> notParsedYet = new ArrayList<>();
-	private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(SearchModule.class);
+
 	//TODO : remanier méthode pour que récursivité ou boucle
 	public void explore() {
-		if(StringUtils.isNotBlank(rootNode)) {
-			if(FileService.isParamADirectory(rootNode)) {
+		if(StringUtils.isNotBlank(this.rootNode)) {
+			if(FileService.isParamADirectory(this.rootNode)) {
 //				notParsedYet.add(FileService.listFilesInDirectory(rootNode));
-				notParsedYet.addAll(FileService.listFilesInDirectoryRecursively(rootNode));
+				this.notParsedYet.addAll(FileService.listFilesInDirectoryRecursively(this.rootNode));
 			} else {
-				LOGGER.debug("Element rencontré non répertoire : {}", rootNode);
+				LOGGER.debug("Element rencontré non répertoire : {}", this.rootNode);
 			}
 		} else {
 			LOGGER.warn("Noeud de départ vide, programme de recherche non lancé");
 		}
 	}
-	
+
+
 	public Map<String, List<String>> searchForMatchesInFetchedData() {
-		Map<String, List<String>> result = new HashMap<>();
-		if(!notParsedYet.isEmpty()) {
-			for(Path p : notParsedYet) {
-				addIfFile(p);
+		final Map<String, List<String>> result = new HashMap<>();
+		if(!this.notParsedYet.isEmpty()) {
+			for(final Path p : this.notParsedYet) {
+				this.addIfFile(p);
 			}
 		}
-		resultBo.getResultsByName().entrySet().stream()
+		this.resultBo.getResultsByName().entrySet().stream()
 				.filter(entry -> entry.getValue().size() > FLOOR_VALUE_TO_NOTICE_DOUBLONS)
 				.forEach(entry -> result.put(entry.getKey(), entry.getValue()));
 		return result;
 	}
 
-	public String getResult(Map<String, List<String>> paramMap) {
-		StringBuilder result = new StringBuilder();
+	public String getResult(final Map<String, List<String>> paramMap) {
+		final StringBuilder result = new StringBuilder();
 		if (!paramMap.isEmpty()) {
 			paramMap.entrySet().stream()
 					.forEach(entry -> result.append(entry.getKey()).append(System.lineSeparator())
@@ -72,13 +73,13 @@ public class SearchModule {
 	 * @return the targetNode
 	 */
 	public String getTargetNode() {
-		return rootNode;
+		return this.rootNode;
 	}
 
 	/**
 	 * @param targetNode the targetNode to set
 	 */
-	public void setTargetNode(String targetNode) {
+	public void setTargetNode(final String targetNode) {
 		this.rootNode = targetNode;
 	}
 
@@ -86,30 +87,30 @@ public class SearchModule {
 	 * @return the resultBo
 	 */
 	public SearchResultBO getResultBo() {
-		return resultBo;
+		return this.resultBo;
 	}
 
 	/**
 	 * @param resultBo the resultBo to set
 	 */
-	public void setResultBo(SearchResultBO resultBo) {
+	public void setResultBo(final SearchResultBO resultBo) {
 		this.resultBo = resultBo;
 	}
-	
+
 	/**
 	 * Initialize in the given map objet a key and its values with an empty list
 	 */
-	private void initializeKeyIfNotExisting(Map<String, List<String>> map, String key) {
+	private void initializeKeyIfNotExisting(final Map<String, List<String>> map, final String key) {
 		if(!map.containsKey(key)) {
 			map.put(key, new ArrayList<String>());
 		}
 	}
-	
-	private void addIfFile(Path fullPathParam) {
+
+	private void addIfFile(final Path fullPathParam) {
 		if(FileUtils.isRegularFile(new File(fullPathParam.toString()), LinkOption.NOFOLLOW_LINKS)) {
-			Path keyPath = fullPathParam.getFileName();
-			initializeKeyIfNotExisting(resultBo.getResultsByName(), keyPath.toString());
-			resultBo.getResultsByName().get(keyPath.toString()).add(fullPathParam.toString());
+			final Path keyPath = fullPathParam.getFileName();
+			this.initializeKeyIfNotExisting(this.resultBo.getResultsByName(), keyPath.toString());
+			this.resultBo.getResultsByName().get(keyPath.toString()).add(fullPathParam.toString());
 		}
 	}
 }

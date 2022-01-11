@@ -8,7 +8,7 @@ import java.util.List;
  *
  */
 public class StringUtils {
-	public static final String EMPTY = "";
+	public static final String EMPTY = org.apache.commons.lang3.StringUtils.EMPTY;
 	
 	private StringUtils() { }
 	

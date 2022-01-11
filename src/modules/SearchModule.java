@@ -1,10 +1,13 @@
 package modules;
 
+import java.io.File;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.io.FileUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -44,9 +47,7 @@ public class SearchModule {
 		Map<String, List<String>> result = new HashMap<>();
 		if(!notParsedYet.isEmpty()) {
 			for(Path p : notParsedYet) {
-				Path keyPath = p.getFileName();
-				initializeKeyIfNotExisting(resultBo.getResultsByName(), keyPath.toString());
-				resultBo.getResultsByName().get(keyPath.toString()).add(p.toString());
+				addIfFile(p);
 			}
 		}
 		resultBo.getResultsByName().entrySet().stream()
@@ -54,7 +55,7 @@ public class SearchModule {
 				.forEach(entry -> result.put(entry.getKey(), entry.getValue()));
 		return result;
 	}
-	
+
 	public String getResult(Map<String, List<String>> paramMap) {
 		StringBuilder result = new StringBuilder();
 		if (!paramMap.isEmpty()) {
@@ -101,6 +102,14 @@ public class SearchModule {
 	private void initializeKeyIfNotExisting(Map<String, List<String>> map, String key) {
 		if(!map.containsKey(key)) {
 			map.put(key, new ArrayList<String>());
+		}
+	}
+	
+	private void addIfFile(Path fullPathParam) {
+		if(FileUtils.isRegularFile(new File(fullPathParam.toString()), LinkOption.NOFOLLOW_LINKS)) {
+			Path keyPath = fullPathParam.getFileName();
+			initializeKeyIfNotExisting(resultBo.getResultsByName(), keyPath.toString());
+			resultBo.getResultsByName().get(keyPath.toString()).add(fullPathParam.toString());
 		}
 	}
 }

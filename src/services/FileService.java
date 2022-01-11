@@ -1,6 +1,7 @@
 package services;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -16,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import maestro.utils.StringUtils;
-import maestro.utils.constants.PunctuationStringConstants;
 
 /**
  * Class used to manipulates files
@@ -72,29 +72,17 @@ public class FileService {
 		return file;
 	}
 
-	public static void writeFile(final String pathToWriteFileTo, final String fileContent) {
-	}
+	public static void writeFile(final String pathToWriteFileToParam, final String fileContentParam) {
 
-	public static Set<String> listFilesInDirectory(final String pathParam) {
-		final Set<String> result = new HashSet<>();
-		Stream<Path> tmp = null;
-		try {
-			tmp = Files.list(new File(pathParam).toPath());
-			// TODO : use logger here
-			tmp.forEach(path -> {
-//				System.out.println(path);
-				result.add(path.toString());
-			});
-		} catch (final IOException ioe) {
-			// TODO : use logger here
-			System.out.println("Problème avec le parcours du dossier : " + pathParam);
-			System.out.println("An IOException occured and here is why : " + ioe.getCause().getMessage());
-		} finally {
-			if (tmp != null) {
-				tmp.close();
-			}
+		try (FileOutputStream outputStream = new FileOutputStream(pathToWriteFileToParam)) {
+
+			final byte[] strToBytes = fileContentParam.getBytes();
+			outputStream.write(strToBytes);
+
+		} catch (final IOException e) {
+			//TODO: utiliser logger ici pour problème d'écriture du stream
+			e.printStackTrace();
 		}
-		return result;
 	}
 
 	public static List<Path> listFilesInDirectoryRecursively(final String pathParam) {
@@ -131,42 +119,5 @@ public class FileService {
 			}
 		}
 		return result;
-	}
-
-	public static String listFilesInDirectoryRecursivelyWithRendering(final String pathParam, final String prefixParam) {
-		final StringBuilder result = new StringBuilder();
-		Stream<Path> tmp = null;
-		final String prefix = StringUtils.isNotEmpty(prefixParam) ? prefixParam : StringUtils.EMPTY;
-		if(!alreadyPrintedElements.contains(pathParam)) {
-//			System.out.println(prefix + pathParam);
-			result.append(prefix).append(pathParam).append(System.lineSeparator());
-			alreadyPrintedElements.add(pathParam);
-		}
-		try {
-			if(isParamADirectory(pathParam)) {
-				tmp = Files.list(new File(pathParam).toPath());
-				// TODO : use logger here
-				tmp.forEach(path -> {
-					if(!alreadyPrintedElements.contains(path.toString())) {
-						result.append(prefix).append(path).append(System.lineSeparator());
-						alreadyPrintedElements.add(path.toString());
-					}
-					if(isParamADirectory(path.toString())) {
-						result.append(listFilesInDirectoryRecursivelyWithRendering(path.toString(), PunctuationStringConstants.WHITESPACE+prefix));
-					}
-				});
-			} else {
-				//TODO : Use logger to log it's not a directory
-			}
-		} catch (final IOException ioe) {
-			// TODO : use logger here
-			System.out.println("Problème avec le parcours du dossier : " + pathParam);
-			System.out.println("An IOException occured and here is why : " + ioe.getCause().getMessage());
-		} finally {
-			if (tmp != null) {
-				tmp.close();
-			}
-		}
-		return result.toString();
 	}
 }

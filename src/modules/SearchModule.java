@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import BusinessObjects.SearchResultBO;
+import business_objects.SearchResultBO;
 import maestro.utils.constants.PunctuationStringConstants;
 import services.FileService;
 

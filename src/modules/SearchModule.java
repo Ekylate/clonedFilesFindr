@@ -29,11 +29,9 @@ public class SearchModule {
 	private final List<Path> notParsedYet = new ArrayList<>();
 	private static final Logger LOGGER = LoggerFactory.getLogger(SearchModule.class);
 
-	//TODO : remanier méthode pour que récursivité ou boucle
 	public void explore() {
 		if(StringUtils.isNotBlank(this.rootNode)) {
 			if(FileService.isParamADirectory(this.rootNode)) {
-//				notParsedYet.add(FileService.listFilesInDirectory(rootNode));
 				this.notParsedYet.addAll(FileService.listFilesInDirectoryRecursively(this.rootNode));
 			} else {
 				LOGGER.debug("Element rencontré non répertoire : {}", this.rootNode);
@@ -62,7 +60,6 @@ public class SearchModule {
 		if (!paramMap.isEmpty()) {
 			paramMap.entrySet().stream()
 					.forEach(entry -> result.append(entry.getKey()).append(System.lineSeparator())
-							.append(PunctuationStringConstants.WHITESPACE)
 							.append(maestro.utils.StringUtils.concatenateStringListToSingleMultilinedString(entry.getValue(),
 									PunctuationStringConstants.FIVE_WHITESPACES)));
 		}

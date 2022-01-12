@@ -73,12 +73,9 @@ public class FileService {
 	}
 
 	public static void writeFile(final String pathToWriteFileToParam, final String fileContentParam) {
-
 		try (FileOutputStream outputStream = new FileOutputStream(pathToWriteFileToParam)) {
-
 			final byte[] strToBytes = fileContentParam.getBytes();
 			outputStream.write(strToBytes);
-
 		} catch (final IOException e) {
 			//TODO: utiliser logger ici pour problème d'écriture du stream
 			e.printStackTrace();

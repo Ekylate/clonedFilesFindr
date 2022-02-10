@@ -3,6 +3,7 @@ package maestro;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import modules.SearchModule;
@@ -24,7 +25,7 @@ public class Ordonnanceur {
 	 * Main method of that program
 	 * @param args
 	 */
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 		saluer();
 		demanderCheminAAnalyser();
 //		demanderOptionsAnalyse();
@@ -35,7 +36,8 @@ public class Ordonnanceur {
 	private static void restituerAnalyse() {
 		// TODO create result file
 		System.out.println(resultMatches);
-		System.out.println();
+		FileUtils.getUserDirectory();
+//		FileService.writeFile(System., resultMatches);
 
 	}
 
@@ -58,7 +60,7 @@ public class Ordonnanceur {
 	}
 
 	private static void saluer() {
-		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.0"));
+		IOConsoleService.displayMessageInConsole(MessagesService.fetchHeader());
 	}
 
 }

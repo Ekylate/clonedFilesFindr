@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import maestro.utils.enums.MessagingKeysEnum;
 import modules.SearchModule;
 import services.IOConsoleService;
 import services.MessagesService;
@@ -22,6 +23,7 @@ public class Ordonnanceur {
 
 	private static final SearchModule spider = new SearchModule();
 	private static String resultMatches = StringUtils.EMPTY;
+	private static String resultsDirectoryForOutputFile = StringUtils.EMPTY;
 
 	/**
 	 * Main method of that program
@@ -52,14 +54,13 @@ public class Ordonnanceur {
 
 	private static void demanderOptionsAnalyse() {
 		// TODO: process fetched options
-		final String msgParam = MessagesService.getString("Ordonnanceur.mainmenu.2"); //$NON-NLS-1$
-		IOConsoleService.displayMessageInConsole(msgParam);
-		final String trc = fetchDataFromConsoleUntilCorrectDirectoryPath();
+		IOConsoleService.displayMessageInConsole(MessagesService.getString(MessagingKeysEnum.MAINMENU_2.getKey()));
+		final String trc = fetchDataFromConsoleUntilCorrectDirectoryPath(MessagesService.getString(MessagingKeysEnum.MAINMENU_2.getKey()));
 	}
 
 	private static void demanderCheminAAnalyser() {
-		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.1"));
-		spider.setTargetNode(fetchDataFromConsoleUntilCorrectDirectoryPath());
+		IOConsoleService.displayMessageInConsole(MessagesService.getString(MessagingKeysEnum.MAINMENU_1.getKey()));
+		spider.setTargetNode(fetchDataFromConsoleUntilCorrectDirectoryPath(MessagesService.getString(MessagingKeysEnum.MAINMENU_1.getKey())));
 	}
 
 	private static void saluer() {
@@ -67,16 +68,16 @@ public class Ordonnanceur {
 	}
 
 	private static void demanderCheminDeRestitutionFichierResultatAnalyse() {
-		IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.mainmenu.3"));
-		final String fetchedData = fetchDataFromConsoleUntilCorrectDirectoryPath();
+		IOConsoleService.displayMessageInConsole(MessagesService.getString(MessagingKeysEnum.MAINMENU_3.getKey()));
+		resultsDirectoryForOutputFile = fetchDataFromConsoleUntilCorrectDirectoryPath(MessagesService.getString(MessagingKeysEnum.MAINMENU_3.getKey()));
 	}
 
-	private static String fetchDataFromConsoleUntilCorrectDirectoryPath() {
+	private static String fetchDataFromConsoleUntilCorrectDirectoryPath(final String additionalErrorMessage) {
 		String result = null;
 		while (result == null || !isFetchedStringAValidDirectoryPath(result)) {
 			result = IOConsoleService.fetchDataFromConsole();
 			if (!isFetchedStringAValidDirectoryPath(result)) {
-				IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.error.0")+"\r\n" + MessagesService.getString("Ordonnanceur.mainmenu.3"));
+				IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.error.0")+"\r\n" + additionalErrorMessage);
 			}
 		}
 		return result;

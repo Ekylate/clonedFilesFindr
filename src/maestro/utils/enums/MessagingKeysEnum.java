@@ -9,6 +9,9 @@ public enum MessagingKeysEnum {
 
 	//Error messages
 	ERROR_0("Ordonnanceur.error.0"),
+
+	//Information messages
+	INFORMATION_0("Ordonnanceur.info.0"),
 	;
 
 	private MessagingKeysEnum(String keyParam) {

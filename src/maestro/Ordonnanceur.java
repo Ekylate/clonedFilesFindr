@@ -2,6 +2,8 @@ package maestro;
 
 import java.io.File;
 import java.nio.file.LinkOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import maestro.utils.enums.MessagingKeysEnum;
 import modules.SearchModule;
+import services.FileService;
 import services.IOConsoleService;
 import services.MessagesService;
 
@@ -24,6 +27,7 @@ public class Ordonnanceur {
 	private static final SearchModule spider = new SearchModule();
 	private static String resultMatches = StringUtils.EMPTY;
 	private static String resultsDirectoryForOutputFile = StringUtils.EMPTY;
+	private static DateTimeFormatter filenameFormatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
 
 	/**
 	 * Main method of that program
@@ -39,11 +43,9 @@ public class Ordonnanceur {
 	}
 
 	private static void restituerAnalyse() {
-		// TODO create result file
-		System.out.println(resultMatches);
-		FileUtils.getUserDirectory();
-//		FileService.writeFile(System., resultMatches);
-
+		IOConsoleService.displayMessageInConsole(resultMatches);
+		IOConsoleService.displayMessageInConsole(MessagesService.getString(MessagingKeysEnum.INFORMATION_0.getKey()));
+		printResultsInFile(resultsDirectoryForOutputFile, resultMatches);
 	}
 
 	private static void analyserChemin() {
@@ -77,7 +79,7 @@ public class Ordonnanceur {
 		while (result == null || !isFetchedStringAValidDirectoryPath(result)) {
 			result = IOConsoleService.fetchDataFromConsole();
 			if (!isFetchedStringAValidDirectoryPath(result)) {
-				IOConsoleService.displayMessageInConsole(MessagesService.getString("Ordonnanceur.error.0")+"\r\n" + additionalErrorMessage);
+				IOConsoleService.displayMessageInConsole(MessagesService.getString(MessagingKeysEnum.ERROR_0.getKey())+"\r\n" + additionalErrorMessage);
 			}
 		}
 		return result;
@@ -89,5 +91,12 @@ public class Ordonnanceur {
 
 	private static boolean isFetchedStringAValidPath(String resultParam) {
 		return StringUtils.isNotBlank(resultParam) && new File(resultParam).exists();
+	}
+
+	private static void printResultsInFile(final String directoryParam, final String fileContentParam) {
+		final StringBuilder filePathBuildr = new StringBuilder();
+		filePathBuildr.append(StringUtils.isNotEmpty(directoryParam) ? directoryParam : FileUtils.getUserDirectory());
+		filePathBuildr.append(LocalDateTime.now().format(filenameFormatter));
+		FileService.writeFile(filePathBuildr.toString(), fileContentParam);
 	}
 }

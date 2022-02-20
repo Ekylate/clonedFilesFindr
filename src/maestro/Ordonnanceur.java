@@ -1,6 +1,7 @@
 package maestro;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.LinkOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,7 +28,7 @@ public class Ordonnanceur {
 	private static final SearchModule spider = new SearchModule();
 	private static String resultMatches = StringUtils.EMPTY;
 	private static String resultsDirectoryForOutputFile = StringUtils.EMPTY;
-	private static DateTimeFormatter filenameFormatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+	private static DateTimeFormatter filenameFormatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
 
 	/**
 	 * Main method of that program
@@ -44,8 +45,10 @@ public class Ordonnanceur {
 
 	private static void restituerAnalyse() {
 		IOConsoleService.displayMessageInConsole(resultMatches);
-		IOConsoleService.displayMessageInConsole(MessagesService.getString(MessagingKeysEnum.INFORMATION_0.getKey()));
-		printResultsInFile(resultsDirectoryForOutputFile, resultMatches);
+		final String pathfileOfResultsFile = printResultsInFile(resultsDirectoryForOutputFile, resultMatches);
+		if(!StringUtils.isEmpty(pathfileOfResultsFile)) {
+			IOConsoleService.displayMessageInConsole(MessagesService.getString(MessagingKeysEnum.INFORMATION_0.getKey()) + StringUtils.SPACE + pathfileOfResultsFile);
+		}
 	}
 
 	private static void analyserChemin() {
@@ -76,9 +79,11 @@ public class Ordonnanceur {
 
 	private static String fetchDataFromConsoleUntilCorrectDirectoryPath(final String additionalErrorMessage) {
 		String result = null;
-		while (result == null || !isFetchedStringAValidDirectoryPath(result)) {
+		boolean isFetchedStringAValidDirectoryPathBoolean = false;
+		while (result == null || !isFetchedStringAValidDirectoryPathBoolean) {
 			result = IOConsoleService.fetchDataFromConsole();
-			if (!isFetchedStringAValidDirectoryPath(result)) {
+			isFetchedStringAValidDirectoryPathBoolean = isFetchedStringAValidDirectoryPath(result);
+			if (!isFetchedStringAValidDirectoryPathBoolean) {
 				IOConsoleService.displayMessageInConsole(MessagesService.getString(MessagingKeysEnum.ERROR_0.getKey())+"\r\n" + additionalErrorMessage);
 			}
 		}
@@ -93,10 +98,19 @@ public class Ordonnanceur {
 		return StringUtils.isNotBlank(resultParam) && new File(resultParam).exists();
 	}
 
-	private static void printResultsInFile(final String directoryParam, final String fileContentParam) {
+	private static String printResultsInFile(final String directoryParam, final String fileContentParam) {
+		String result;
 		final StringBuilder filePathBuildr = new StringBuilder();
 		filePathBuildr.append(StringUtils.isNotEmpty(directoryParam) ? directoryParam : FileUtils.getUserDirectory());
+		filePathBuildr.append(File.separator);
 		filePathBuildr.append(LocalDateTime.now().format(filenameFormatter));
-		FileService.writeFile(filePathBuildr.toString(), fileContentParam);
+		try {
+			FileService.writeFile(filePathBuildr.toString(), fileContentParam);
+			result = filePathBuildr.toString();
+		} catch (final IOException e) {
+			result = StringUtils.EMPTY;
+		}
+
+		return result;
 	}
 }

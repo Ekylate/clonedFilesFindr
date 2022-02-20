@@ -12,6 +12,8 @@ import maestro.utils.StringUtils;
  */
 public class IOConsoleService {
 
+	private static Scanner scannerVar;
+
 	/**
 	 * Méthode permettant d'afficher du texte en console
 	 *
@@ -28,12 +30,22 @@ public class IOConsoleService {
 	 * Méthode permettant de récupérer les entrants en provenance de la console
 	 * @return ce que l'utilisateur a récupéré
 	 */
-	//TODO : create utils method
 	public static String fetchDataFromConsole() {
-		final Scanner scanner = new Scanner(System.in);
-		final String incomingValue = scanner.next();
-		scanner.close();
+		initScannerIfNecessary();
+		final String incomingValue = scannerVar.next();
+//		System.out.println("Valeur recuperee par le scanner = " + incomingValue);
 		return incomingValue;
 	}
 
+	private static void initScannerIfNecessary() {
+		if(scannerVar == null ) {
+			scannerVar = new Scanner(System.in);
+		}
+	}
+
+	public static void closeScanner() {
+		if(scannerVar != null) {
+			scannerVar.close();
+		}
+	}
 }

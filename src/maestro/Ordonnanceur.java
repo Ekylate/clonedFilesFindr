@@ -38,6 +38,7 @@ public class Ordonnanceur {
 		saluer();
 		demanderCheminAAnalyser();
 		demanderCheminDeRestitutionFichierResultatAnalyse();
+		fermerScanner();
 //		demanderOptionsAnalyse();
 		analyserChemin();
 		restituerAnalyse();
@@ -112,5 +113,9 @@ public class Ordonnanceur {
 		}
 
 		return result;
+	}
+
+	private static void fermerScanner() {
+		IOConsoleService.closeScanner();
 	}
 }

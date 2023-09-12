@@ -39,23 +39,39 @@
 			        </execution>
 			    </executions>
 			</plugin>
+		    <plugin>
+		      <artifactId>maven-assembly-plugin</artifactId>
+		      <configuration>
+		        <archive>
+		          <manifest>
+		            <mainClass>maestro.Ordonnanceur</mainClass>
+		          </manifest>
+		        </archive>
+		        <descriptorRefs>
+		          <descriptorRef>jar-with-dependencies</descriptorRef>
+		        </descriptorRefs>
+		        <appendAssemblyId>false</appendAssemblyId>
+		        <finalName>${project.artifactId}-${project.version}</finalName>
+		        <outputDirectory>target</outputDirectory>
+		      </configuration>
+		      <executions>
+			      <execution>
+			      	<id>make-assembly</id>
+			      	<phase>package</phase>
+			      	<goals>
+			      		<goal>single</goal>
+			      	</goals>
+			      </execution>
+		      </executions>
+		    </plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-jar-plugin</artifactId>
-			    <version>3.1.2</version>
-			    <configuration>
-			        <archive>
-			            <manifest>
-			            	<addClasspath>true</addClasspath>
-			            	<classpathPrefix>lib/</classpathPrefix>
-			                <mainClass>maestro.Ordonnanceur</mainClass>
-			                <packageName>${project.groupId}</packageName>
-			            </manifest>
-			            <manifestEntries>
-			                <Created-By>Unknown-guy</Created-By>
-			            </manifestEntries>
-			        </archive>
-			    </configuration>
+			    <executions>
+			    	<execution>
+			    		<id>default-jar</id>
+			    		<phase>none</phase>
+			    	</execution>
+			    </executions>
 			</plugin>
 <!--			<plugin>-->
 <!--				<groupId>org.apache.maven.plugins</groupId>-->

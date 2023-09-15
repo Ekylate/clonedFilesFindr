@@ -1,8 +1,8 @@
-package services;
+package fr.kazanmw.services;
 
 import java.util.Scanner;
 
-import maestro.utils.StringUtils;
+import fr.kazanmw.maestro.utils.StringUtils;
 
 
 /**

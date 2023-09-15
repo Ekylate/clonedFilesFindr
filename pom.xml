@@ -48,7 +48,7 @@
 			            <manifest>
 			            	<addClasspath>true</addClasspath>
 			            	<classpathPrefix>lib/</classpathPrefix>
-			                <mainClass>maestro.Ordonnanceur</mainClass>
+			                <mainClass>fr.kazanmw.maestro.Ordonnanceur</mainClass>
 			                <packageName>${project.groupId}</packageName>
 			            </manifest>
 			            <manifestEntries>

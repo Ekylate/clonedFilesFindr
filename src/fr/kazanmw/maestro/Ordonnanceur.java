@@ -1,4 +1,4 @@
-package maestro;
+package fr.kazanmw.maestro;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,11 +11,11 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import maestro.utils.enums.MessagingKeysEnum;
-import modules.SearchModule;
-import services.FileService;
-import services.IOConsoleService;
-import services.MessagesService;
+import fr.kazanmw.maestro.utils.enums.MessagingKeysEnum;
+import fr.kazanmw.modules.SearchModule;
+import fr.kazanmw.services.FileService;
+import fr.kazanmw.services.IOConsoleService;
+import fr.kazanmw.services.MessagesService;
 
 /**
  * Class used to launch processes

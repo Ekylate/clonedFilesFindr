@@ -1,4 +1,4 @@
-package maestro.utils.constants;
+package fr.kazanmw.maestro.utils.constants;
 
 /**
  * Class used to store punctuation characters as String constants

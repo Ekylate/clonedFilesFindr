@@ -1,4 +1,4 @@
-package services;
+package fr.kazanmw.services;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import maestro.utils.StringUtils;
+import fr.kazanmw.maestro.utils.StringUtils;
 
 /**
  * Class used to manipulates files

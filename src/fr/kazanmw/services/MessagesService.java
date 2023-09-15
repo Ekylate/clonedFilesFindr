@@ -1,4 +1,4 @@
-package services;
+package fr.kazanmw.services;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package maestro.utils.enums;
+package fr.kazanmw.maestro.utils.enums;
 
 public enum MessagingKeysEnum {
 	//Main menu messages

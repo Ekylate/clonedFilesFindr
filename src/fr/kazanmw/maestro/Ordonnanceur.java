@@ -26,6 +26,7 @@ import fr.kazanmw.services.MessagesService;
 public class Ordonnanceur {
 
 	private static final SearchModule spider = new SearchModule();
+	private static final Object RESULT_FILE_EXTENSION = ".txt";
 	private static String resultMatches = StringUtils.EMPTY;
 	private static String resultsDirectoryForOutputFile = StringUtils.EMPTY;
 	private static DateTimeFormatter filenameFormatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
@@ -132,8 +133,11 @@ public class Ordonnanceur {
 		String result;
 		final StringBuilder filePathBuildr = new StringBuilder();
 		filePathBuildr.append(StringUtils.isNotEmpty(directoryParam) ? directoryParam : FileUtils.getUserDirectory());
-		filePathBuildr.append(File.separator);
+		if(!StringUtils.endsWith(directoryParam, File.separator)) {
+			filePathBuildr.append(File.separator);
+		}
 		filePathBuildr.append(LocalDateTime.now().format(filenameFormatter));
+		filePathBuildr.append(RESULT_FILE_EXTENSION);
 		try {
 			FileService.writeFile(filePathBuildr.toString(), fileContentParam);
 			result = filePathBuildr.toString();

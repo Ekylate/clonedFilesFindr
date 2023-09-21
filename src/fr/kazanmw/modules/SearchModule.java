@@ -59,7 +59,7 @@ public class SearchModule {
 		final StringBuilder result = new StringBuilder();
 		if (!paramMap.isEmpty()) {
 			paramMap.entrySet().stream()
-					.forEach(entry -> result.append(entry.getKey()).append(System.lineSeparator())
+					.forEach(entry -> result.append(System.lineSeparator()).append(entry.getKey()).append(System.lineSeparator())
 							.append(fr.kazanmw.maestro.utils.StringUtils.concatenateStringListToSingleMultilinedString(entry.getValue(),
 									PunctuationStringConstants.FIVE_WHITESPACES)));
 		}

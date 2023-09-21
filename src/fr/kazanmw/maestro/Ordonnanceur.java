@@ -133,7 +133,9 @@ public class Ordonnanceur {
 		String result;
 		final StringBuilder filePathBuildr = new StringBuilder();
 		filePathBuildr.append(StringUtils.isNotEmpty(directoryParam) ? directoryParam : FileUtils.getUserDirectory());
-		filePathBuildr.append(File.separator);
+		if(!StringUtils.endsWith(directoryParam, File.separator)) {
+			filePathBuildr.append(File.separator);
+		}
 		filePathBuildr.append(LocalDateTime.now().format(filenameFormatter));
 		filePathBuildr.append(RESULT_FILE_EXTENSION);
 		try {

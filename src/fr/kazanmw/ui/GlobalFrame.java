@@ -1,11 +1,15 @@
 package fr.kazanmw.ui;
 
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import fr.kazanmw.maestro.Ordonnanceur;
 
 public class GlobalFrame extends JFrame{
 	/**
@@ -27,6 +31,12 @@ public class GlobalFrame extends JFrame{
 		this.txtChooseTheFolder.setColumns(10);
 
 		final JButton btnNewButton = new JButton("choose folder");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				GlobalFrame.this.ouvrirExplorateur();
+			}
+		});
 		btnNewButton.setToolTipText("click here to select a folder through Windows explorer");
 		btnNewButton.setBounds(251, 44, 105, 23);
 		this.getContentPane().add(btnNewButton);
@@ -40,5 +50,33 @@ public class GlobalFrame extends JFrame{
 		lblValue.setFont(new Font("Source Sans Pro Light", Font.PLAIN, 17));
 		lblValue.setBounds(224, 94, 116, 26);
 		this.getContentPane().add(lblValue);
+
+		final JButton processLaunchingButton = new JButton("Search for clones");
+		processLaunchingButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Ordonnanceur.lancerTraitementPourIHM();
+			}
+		});
+		processLaunchingButton.setBounds(80, 142, 116, 23);
+		this.getContentPane().add(processLaunchingButton);
+
+		final JButton resultsFolderOpeningButton = new JButton("Open results folder");
+		resultsFolderOpeningButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				GlobalFrame.this.ouvrirDossierDeResultats();
+			}
+		});
+		resultsFolderOpeningButton.setBounds(206, 142, 134, 23);
+		this.getContentPane().add(resultsFolderOpeningButton);
+	}
+
+	//TODO: JTA : compléter méthode
+	protected void ouvrirDossierDeResultats() {
+	}
+
+	//TODO: JTA : compléter méthode
+	protected void ouvrirExplorateur() {
 	}
 }

@@ -35,6 +35,35 @@ public class Ordonnanceur {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		lancerTraitementPourInviteDeCommandes();
+	}
+
+	public static void lancerTraitementPourIHM() {
+		if(verifierConditionsDeLancement()) {
+			deduireCheminRestitutionResultat();
+//			demanderOptionsAnalyse();
+			analyserChemin();
+			creerFichierResultatDeRecherche();
+			restituerAnalyse();
+		}
+	}
+
+	//TODO : JTA : compléter méthode
+	private static boolean verifierConditionsDeLancement() {
+		return true;
+	}
+
+	private static void deduireCheminRestitutionResultat() {
+		// TODO Auto-generated method stub
+
+	}
+
+	//TODO : JTA : récupérer chemin du fichier créé pour restitution utilisateur
+	private static void creerFichierResultatDeRecherche() {
+		printResultsInFile(resultsDirectoryForOutputFile, resultMatches);
+	}
+
+	private static void lancerTraitementPourInviteDeCommandes() {
 		saluer();
 		demanderCheminAAnalyser();
 		demanderCheminDeRestitutionFichierResultatAnalyse();

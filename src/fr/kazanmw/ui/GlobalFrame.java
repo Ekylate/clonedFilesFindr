@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import fr.kazanmw.maestro.Ordonnanceur;
 
@@ -20,7 +21,6 @@ public class GlobalFrame extends JFrame{
 
 	public GlobalFrame() {
 		this.setTitle("CloneFinder");
-		this.setResizable(false);
 		this.getContentPane().setLayout(null);
 
 		this.txtChooseTheFolder = new JTextField();
@@ -71,6 +71,21 @@ public class GlobalFrame extends JFrame{
 		});
 		resultsFolderOpeningButton.setBounds(206, 142, 134, 23);
 		this.getContentPane().add(resultsFolderOpeningButton);
+	}
+
+	/**
+	 * Main method of that program
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				final GlobalFrame globalFrame = new GlobalFrame();
+				globalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				globalFrame.setVisible(true);
+			}
+		});
 	}
 
 	/**

@@ -41,6 +41,7 @@ public class Ordonnanceur {
 
 	public static void lancerTraitementPourIHM(String pathParam) {
 		if(verifierConditionsDeLancement(pathParam)) {
+			spider.setTargetNode(pathParam);
 			deduireCheminRestitutionResultat(pathParam);
 //			demanderOptionsAnalyse();
 			analyserChemin();
@@ -53,9 +54,9 @@ public class Ordonnanceur {
 		return StringUtils.isNotEmpty(pathParam) && FileService.isParamADirectory(pathParam);
 	}
 
+	// TODO : JTA/JAE : stop using static vars, use return and parameters instead
 	private static void deduireCheminRestitutionResultat(String pathParam) {
-		// TODO Auto-generated method stub
-
+		resultsDirectoryForOutputFile = pathParam;
 	}
 
 	//TODO : JTA : récupérer chemin du fichier créé pour restitution utilisateur

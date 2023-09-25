@@ -17,6 +17,7 @@ public class GlobalFrame extends JFrame{
 	 */
 	private static final long serialVersionUID = -3957819353328780072L;
 	private final JTextField txtChooseTheFolder;
+
 	public GlobalFrame() {
 		this.setTitle("CloneFinder");
 		this.setResizable(false);
@@ -30,16 +31,16 @@ public class GlobalFrame extends JFrame{
 		this.getContentPane().add(this.txtChooseTheFolder);
 		this.txtChooseTheFolder.setColumns(10);
 
-		final JButton btnNewButton = new JButton("choose folder");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		final JButton btnPickingUpFolder = new JButton("choose folder");
+		btnPickingUpFolder.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				GlobalFrame.this.ouvrirExplorateur();
 			}
 		});
-		btnNewButton.setToolTipText("click here to select a folder through Windows explorer");
-		btnNewButton.setBounds(251, 44, 105, 23);
-		this.getContentPane().add(btnNewButton);
+		btnPickingUpFolder.setToolTipText("click here to select a folder through Windows explorer");
+		btnPickingUpFolder.setBounds(251, 44, 105, 23);
+		this.getContentPane().add(btnPickingUpFolder);
 
 		final JLabel lblStatusText = new JLabel("Last run status :");
 		lblStatusText.setFont(new Font("Source Sans Pro Light", Font.PLAIN, 17));
@@ -55,7 +56,7 @@ public class GlobalFrame extends JFrame{
 		processLaunchingButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Ordonnanceur.lancerTraitementPourIHM();
+				Ordonnanceur.lancerTraitementPourIHM(GlobalFrame.this.getTxtChooseTheFolder().getText());
 			}
 		});
 		processLaunchingButton.setBounds(80, 142, 116, 23);
@@ -70,6 +71,13 @@ public class GlobalFrame extends JFrame{
 		});
 		resultsFolderOpeningButton.setBounds(206, 142, 134, 23);
 		this.getContentPane().add(resultsFolderOpeningButton);
+	}
+
+	/**
+	 * @return the txtChooseTheFolder
+	 */
+	public JTextField getTxtChooseTheFolder() {
+		return this.txtChooseTheFolder;
 	}
 
 	//TODO: JTA : compléter méthode

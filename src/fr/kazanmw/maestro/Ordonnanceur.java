@@ -39,9 +39,9 @@ public class Ordonnanceur {
 		lancerTraitementPourInviteDeCommandes();
 	}
 
-	public static void lancerTraitementPourIHM() {
-		if(verifierConditionsDeLancement()) {
-			deduireCheminRestitutionResultat();
+	public static void lancerTraitementPourIHM(String pathParam) {
+		if(verifierConditionsDeLancement(pathParam)) {
+			deduireCheminRestitutionResultat(pathParam);
 //			demanderOptionsAnalyse();
 			analyserChemin();
 			creerFichierResultatDeRecherche();
@@ -49,12 +49,11 @@ public class Ordonnanceur {
 		}
 	}
 
-	//TODO : JTA : compléter méthode
-	private static boolean verifierConditionsDeLancement() {
-		return true;
+	private static boolean verifierConditionsDeLancement(String pathParam) {
+		return StringUtils.isNotEmpty(pathParam) && FileService.isParamADirectory(pathParam);
 	}
 
-	private static void deduireCheminRestitutionResultat() {
+	private static void deduireCheminRestitutionResultat(String pathParam) {
 		// TODO Auto-generated method stub
 
 	}

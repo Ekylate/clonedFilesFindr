@@ -1,10 +1,13 @@
 package fr.kazanmw.maestro;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.LinkOption;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +32,7 @@ public class Ordonnanceur {
 	private static final Object RESULT_FILE_EXTENSION = ".txt";
 	private static String resultMatches = StringUtils.EMPTY;
 	private static String resultsDirectoryForOutputFile = StringUtils.EMPTY;
+	private static String resultsOutputFile = StringUtils.EMPTY;
 	private static DateTimeFormatter filenameFormatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
 
 	/**
@@ -50,6 +54,23 @@ public class Ordonnanceur {
 		}
 	}
 
+	public static void ouvrirDossierResultat() {
+		System.out.println(Date.from(Instant.now())+ " : ouvrirDossierResultat : resultsOutputFile : " + resultsOutputFile);
+		System.out.println(Date.from(Instant.now())+ " : ouvrirDossierResultat : resultsDirectoryForOutputFile : " + resultsDirectoryForOutputFile);
+		try {
+			if(StringUtils.isNotBlank(resultsOutputFile)) {
+					Desktop.getDesktop().open(new File(resultsOutputFile));
+			} else if(StringUtils.isNotBlank(resultsDirectoryForOutputFile)) {
+				Desktop.getDesktop().open(new File(resultsDirectoryForOutputFile));
+			} else {
+				//TODO : JTA/JAE : put error HERE
+			}
+		} catch (final IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	private static boolean verifierConditionsDeLancement(String pathParam) {
 		return StringUtils.isNotEmpty(pathParam) && FileService.isParamADirectory(pathParam);
 	}
@@ -61,7 +82,10 @@ public class Ordonnanceur {
 
 	//TODO : JTA : récupérer chemin du fichier créé pour restitution utilisateur
 	private static void creerFichierResultatDeRecherche() {
-		printResultsInFile(resultsDirectoryForOutputFile, resultMatches);
+		final String printedFilePath = printResultsInFile(resultsDirectoryForOutputFile, resultMatches);
+		if(StringUtils.isNotBlank(printedFilePath)) {
+			resultsOutputFile = printedFilePath;
+		}
 	}
 
 	private static void lancerTraitementPourInviteDeCommandes() {

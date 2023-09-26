@@ -64,6 +64,7 @@ public class GlobalFrame extends JFrame{
 		btnPickingUpFolder.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				System.out.println("mouse clicked on button 'choose folder' : " + Date.from(Instant.now()));
 				GlobalFrame.this.ouvrirExplorateur();
 			}
 		});
@@ -91,15 +92,15 @@ public class GlobalFrame extends JFrame{
 		processLaunchingButton.setBounds(80, 142, 116, 23);
 		this.getContentPane().add(processLaunchingButton);
 
-		final JButton resultsFolderOpeningButton = new JButton("Open results folder");
-		resultsFolderOpeningButton.addMouseListener(new MouseAdapter() {
+		final JButton resultsFileOpeningButton = new JButton("Open results file");
+		resultsFileOpeningButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GlobalFrame.this.ouvrirDossierDeResultats();
+				GlobalFrame.this.ouvrirFichierDeResultats();
 			}
 		});
-		resultsFolderOpeningButton.setBounds(206, 142, 134, 23);
-		this.getContentPane().add(resultsFolderOpeningButton);
+		resultsFileOpeningButton.setBounds(206, 142, 134, 23);
+		this.getContentPane().add(resultsFileOpeningButton);
 	}
 
 	/**
@@ -123,12 +124,13 @@ public class GlobalFrame extends JFrame{
 		return this.txtChooseTheFolder;
 	}
 
-	//TODO: JTA : compléter méthode
-	protected void ouvrirDossierDeResultats() {
+	private void ouvrirFichierDeResultats() {
+		System.out.println("mouse clicked on text field : " + Date.from(Instant.now()));
+		Ordonnanceur.ouvrirDossierResultat();
 	}
 
 	//TODO: JTA : compléter méthode
-	protected void ouvrirExplorateur() {
+	private void ouvrirExplorateur() {
 	}
 
 	private void clearTextFieldOnInteraction() {

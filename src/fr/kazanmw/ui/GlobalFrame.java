@@ -1,8 +1,12 @@
 package fr.kazanmw.ui;
 
 import java.awt.Font;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.Instant;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,9 +14,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.lang3.StringUtils;
+
 import fr.kazanmw.maestro.Ordonnanceur;
 
 public class GlobalFrame extends JFrame{
+	private static final String TYPE_YOUR_FOLDER_HERE = "Type your folder here...";
+	static int txtChooseTheFolderInteractionCounter = 0;
 	/**
 	 *
 	 */
@@ -26,9 +34,28 @@ public class GlobalFrame extends JFrame{
 		this.getContentPane().setLayout(null);
 
 		this.txtChooseTheFolder = new JTextField();
+		this.txtChooseTheFolder.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("mouse clicked on text field : " + Date.from(Instant.now()));
+				GlobalFrame.this.clearTextFieldOnInteraction();
+			}
+		});
+		this.txtChooseTheFolder.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				System.out.println("focus gained on text field : " + Date.from(Instant.now()));
+				GlobalFrame.this.clearTextFieldOnInteraction();
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				System.out.println("focus lost on text field : " + Date.from(Instant.now()));
+				GlobalFrame.this.putBackPlaceholder();
+			}
+		});
 		this.txtChooseTheFolder.setEnabled(true);
 		this.txtChooseTheFolder.setEditable(true);
-		this.txtChooseTheFolder.setText("Type your folder here...");
+		this.txtChooseTheFolder.setText(TYPE_YOUR_FOLDER_HERE);
 		this.txtChooseTheFolder.setBounds(68, 42, 173, 26);
 		this.getContentPane().add(this.txtChooseTheFolder);
 		this.txtChooseTheFolder.setColumns(10);
@@ -102,5 +129,18 @@ public class GlobalFrame extends JFrame{
 
 	//TODO: JTA : compléter méthode
 	protected void ouvrirExplorateur() {
+	}
+
+	private void clearTextFieldOnInteraction() {
+		if(txtChooseTheFolderInteractionCounter > 0 && StringUtils.equals(TYPE_YOUR_FOLDER_HERE, this.txtChooseTheFolder.getText())) {
+			this.txtChooseTheFolder.setText(StringUtils.EMPTY);
+		}
+		txtChooseTheFolderInteractionCounter++;
+	}
+
+	private void putBackPlaceholder() {
+		if(StringUtils.isBlank(this.txtChooseTheFolder.getText())) {
+			this.txtChooseTheFolder.setText(TYPE_YOUR_FOLDER_HERE);
+		}
 	}
 }

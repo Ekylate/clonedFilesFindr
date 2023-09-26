@@ -21,6 +21,8 @@ public class GlobalFrame extends JFrame{
 
 	public GlobalFrame() {
 		this.setTitle("CloneFinder");
+		this.setBounds(400, 400, 450, 250);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
 
 		this.txtChooseTheFolder = new JTextField();
@@ -82,7 +84,6 @@ public class GlobalFrame extends JFrame{
 			@Override
 			public void run() {
 				final GlobalFrame globalFrame = new GlobalFrame();
-				globalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				globalFrame.setVisible(true);
 			}
 		});

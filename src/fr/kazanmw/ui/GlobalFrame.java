@@ -64,7 +64,7 @@ public class GlobalFrame extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("mouse clicked on button 'choose folder' : " + Date.from(Instant.now()));
-				GlobalFrame.this.ouvrirExplorateur();
+				GlobalFrame.this.ouvrirExplorateurChoixDossierRecherche();
 			}
 		});
 		btnPickingUpFolder.setToolTipText("click here to select a folder through Windows explorer");
@@ -138,7 +138,9 @@ public class GlobalFrame extends JFrame{
 		Ordonnanceur.ouvrirDossierResultat();
 	}
 
-	private void ouvrirExplorateur() {
+	private void ouvrirExplorateurChoixDossierRecherche() {
+		final String resultat = Ordonnanceur.choisirDossierRecherche(this.getTxtChooseTheFolder().getText(), this);
+		this.setValeurTexteTxtChooseTheFolder(resultat);
 	}
 
 	private void clearTextFieldOnInteraction() {

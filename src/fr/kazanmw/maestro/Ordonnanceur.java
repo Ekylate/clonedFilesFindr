@@ -1,5 +1,6 @@
 package fr.kazanmw.maestro;
 
+import java.awt.Component;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -69,6 +70,10 @@ public class Ordonnanceur {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public static String choisirDossierRecherche(String dossierSaisiParam, Component globalFrameParam) {
+		return StringUtils.EMPTY;
 	}
 
 	private static boolean verifierConditionsDeLancement(String pathParam) {

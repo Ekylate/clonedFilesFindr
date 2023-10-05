@@ -38,14 +38,6 @@ public class Ordonnanceur {
 	private static String resultsOutputFile = StringUtils.EMPTY;
 	private static DateTimeFormatter filenameFormatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
 
-	/**
-	 * Main method of that program
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		lancerTraitementPourInviteDeCommandes();
-	}
-
 	public static void lancerTraitementPourIHM(String pathParam) {
 		if(verifierConditionsDeLancement(pathParam)) {
 			spider.setTargetNode(pathParam);

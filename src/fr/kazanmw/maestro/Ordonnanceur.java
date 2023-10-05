@@ -29,7 +29,7 @@ import fr.kazanmw.services.MessagesService;
 public class Ordonnanceur {
 
 	private static final SearchModule spider = new SearchModule();
-	private static final Object RESULT_FILE_EXTENSION = ".txt";
+	private static final String RESULT_FILE_EXTENSION = ".txt";
 	private static String resultMatches = StringUtils.EMPTY;
 	private static String resultsDirectoryForOutputFile = StringUtils.EMPTY;
 	private static String resultsOutputFile = StringUtils.EMPTY;
@@ -115,7 +115,7 @@ public class Ordonnanceur {
 	private static void demanderOptionsAnalyse() {
 		// TODO: process fetched options
 		IOConsoleService.displayMessageInConsole(MessagesService.getString(MessagingKeysEnum.MAINMENU_2.getKey()));
-		final String trc = fetchDataFromConsoleUntilCorrectDirectoryPath(MessagesService.getString(MessagingKeysEnum.MAINMENU_2.getKey()));
+		fetchDataFromConsoleUntilCorrectDirectoryPath(MessagesService.getString(MessagingKeysEnum.MAINMENU_2.getKey()));
 	}
 
 	private static void demanderCheminAAnalyser() {

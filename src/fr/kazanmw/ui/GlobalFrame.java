@@ -25,7 +25,7 @@ public class GlobalFrame extends JFrame{
 	 *
 	 */
 	private static final long serialVersionUID = -3957819353328780072L;
-	private final JTextField txtChooseTheFolder;
+	private final JTextField txtChooseTheFolder = new JTextField();
 
 	public GlobalFrame() {
 		this.setTitle("CloneFinder");
@@ -33,7 +33,6 @@ public class GlobalFrame extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
 
-		this.txtChooseTheFolder = new JTextField();
 		this.txtChooseTheFolder.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -124,12 +123,21 @@ public class GlobalFrame extends JFrame{
 		return this.txtChooseTheFolder;
 	}
 
+	public void setValeurTexteTxtChooseTheFolder(String valeurTexteParam) {
+		if(StringUtils.isNotBlank(valeurTexteParam)) {
+			this.txtChooseTheFolder.setText(valeurTexteParam);
+		}
+	}
+
+	public void clearValeurTexteTxtChooseTheFolder() {
+		this.txtChooseTheFolder.setText(StringUtils.EMPTY);
+	}
+
 	private void ouvrirFichierDeResultats() {
 		System.out.println("mouse clicked on text field : " + Date.from(Instant.now()));
 		Ordonnanceur.ouvrirDossierResultat();
 	}
 
-	//TODO: JTA : compléter méthode
 	private void ouvrirExplorateur() {
 	}
 

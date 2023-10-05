@@ -2,7 +2,7 @@ package fr.kazanmw.services;
 
 import java.util.Scanner;
 
-import fr.kazanmw.maestro.utils.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 
 /**

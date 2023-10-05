@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JFileChooser;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -73,6 +75,19 @@ public class Ordonnanceur {
 	}
 
 	public static String choisirDossierRecherche(String dossierSaisiParam, Component globalFrameParam) {
+		final JFileChooser fileChooser = new JFileChooser();
+		if(StringUtils.isNotBlank(dossierSaisiParam)) {
+			fileChooser.setCurrentDirectory(new File(dossierSaisiParam));
+		}
+		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		final int resultat = fileChooser.showOpenDialog(globalFrameParam);
+		if(resultat == JFileChooser.APPROVE_OPTION) {
+			final File selectedFile = fileChooser.getSelectedFile();
+			if(selectedFile.isDirectory()){
+				return selectedFile.getAbsolutePath();
+			}
+			//TODO  : JTA/JAE : Put feedback message here : choose a directory and not a file
+		}
 		return StringUtils.EMPTY;
 	}
 

@@ -1,4 +1,4 @@
-package fr.kazanmw.maestro;
+package fr.kazanmw.findr.maestro;
 
 import java.awt.Component;
 import java.awt.Desktop;
@@ -17,11 +17,11 @@ import javax.swing.JFileChooser;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import fr.kazanmw.maestro.utils.enums.MessagingKeysEnum;
-import fr.kazanmw.modules.SearchModule;
-import fr.kazanmw.services.FileService;
-import fr.kazanmw.services.IOConsoleService;
-import fr.kazanmw.services.MessagesService;
+import fr.kazanmw.findr.maestro.utils.enums.MessagingKeysEnum;
+import fr.kazanmw.findr.modules.SearchModule;
+import fr.kazanmw.findr.services.FileService;
+import fr.kazanmw.findr.services.IOConsoleService;
+import fr.kazanmw.findr.services.MessagesService;
 
 /**
  * Class used to launch processes

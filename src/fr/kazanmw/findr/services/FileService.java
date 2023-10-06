@@ -1,4 +1,4 @@
-package fr.kazanmw.services;
+package fr.kazanmw.findr.services;
 
 import java.io.File;
 import java.io.FileOutputStream;

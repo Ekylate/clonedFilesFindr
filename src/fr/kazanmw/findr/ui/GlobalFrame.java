@@ -1,4 +1,4 @@
-package fr.kazanmw.ui;
+package fr.kazanmw.findr.ui;
 
 import java.awt.Font;
 import java.awt.event.FocusAdapter;
@@ -16,7 +16,8 @@ import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
 
-import fr.kazanmw.maestro.Ordonnanceur;
+import fr.kazanmw.findr.maestro.Ordonnanceur;
+import fr.kazanmw.findr.ui.service.PopUpDisplayingService;
 
 public class GlobalFrame extends JFrame{
 	private static final String TYPE_YOUR_FOLDER_HERE = "Type your folder here...";

@@ -1,4 +1,4 @@
-package fr.kazanmw.business_objects;
+package fr.kazanmw.findr.business_objects;
 
 import java.util.HashMap;
 import java.util.List;

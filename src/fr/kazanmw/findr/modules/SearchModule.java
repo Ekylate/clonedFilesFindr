@@ -1,4 +1,4 @@
-package fr.kazanmw.modules;
+package fr.kazanmw.findr.modules;
 
 import java.io.File;
 import java.nio.file.LinkOption;
@@ -13,9 +13,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.kazanmw.business_objects.SearchResultBO;
-import fr.kazanmw.maestro.utils.constants.PunctuationStringConstants;
-import fr.kazanmw.services.FileService;
+import fr.kazanmw.findr.business_objects.SearchResultBO;
+import fr.kazanmw.findr.maestro.utils.constants.PunctuationStringConstants;
+import fr.kazanmw.findr.services.FileService;
 
 /**
  * Class used to search through directories
@@ -60,7 +60,7 @@ public class SearchModule {
 		if (!paramMap.isEmpty()) {
 			paramMap.entrySet().stream()
 					.forEach(entry -> result.append(System.lineSeparator()).append(entry.getKey()).append(System.lineSeparator())
-							.append(fr.kazanmw.maestro.utils.StringUtils.concatenateStringListToSingleMultilinedString(entry.getValue(),
+							.append(fr.kazanmw.findr.maestro.utils.StringUtils.concatenateStringListToSingleMultilinedString(entry.getValue(),
 									PunctuationStringConstants.FIVE_WHITESPACES)));
 		}
 		return result.toString();

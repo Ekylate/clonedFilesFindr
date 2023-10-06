@@ -1,4 +1,4 @@
-package fr.kazanmw.maestro.utils;
+package fr.kazanmw.findr.maestro.utils;
 
 import java.util.List;
 

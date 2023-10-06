@@ -48,7 +48,7 @@
 			            <manifest>
 			            	<addClasspath>true</addClasspath>
 			            	<classpathPrefix>lib/</classpathPrefix>
-			                <mainClass>fr.kazanmw.ui.GlobalFrame</mainClass>
+			                <mainClass>fr.kazanmw.findr.ui.GlobalFrame</mainClass>
 			                <packageName>${project.groupId}</packageName>
 			            </manifest>
 			            <manifestEntries>

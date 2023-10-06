@@ -1,4 +1,4 @@
-package fr.kazanmw.ui.service;
+package fr.kazanmw.findr.ui.service;
 
 import java.awt.Component;
 
